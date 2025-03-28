@@ -1,0 +1,298 @@
+:root {
+    --primary-color: #2a5af4;
+    --background-color: #f4f5f9;
+    --text-color: #333;
+    --card-bg: #ffffff;
+    --border-color: #e0e4e8;
+    --sidebar-bg: #f8f9fb;
+    --sidebar-text: #555;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.app-header {
+    background-color: var(--card-bg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.user-profile {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.dropdown-menu p {
+    margin: 0;
+    font-weight: bold;
+}
+
+.dropdown-menu button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background: #f44336;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.dropdown-menu button:hover {
+    background: #d32f2f;
+}
+
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 240px;
+    background-color: var(--sidebar-bg);
+    border-right: 1px solid var(--border-color);
+    padding-top: 20px;
+    transition: width 0.3s ease;
+}
+
+.sidebar:hover {
+    width: 260px;
+}
+
+.sidebar-menu {
+    list-style: none;
+}
+
+.sidebar-menu > li > a {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    color: var(--sidebar-text);
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.2s, transform 0.2s, color 0.3s;
+}
+
+.sidebar-menu > li > a:hover,
+.sidebar-menu > li > a.active {
+    background-color: rgba(42, 90, 244, 0.1);
+    color: var(--primary-color);
+    transform: translateX(5px);
+}
+
+.sidebar-menu ul {
+    list-style: none;
+    padding-left: 20px;
+    margin-top: 5px;
+    border-left: 2px solid var(--border-color);
+}
+
+.sidebar-menu ul li a {
+    display: block;
+    padding: 8px 20px;
+    color: var(--sidebar-text);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s, transform 0.2s;
+}
+
+.sidebar-menu ul li a:hover {
+    color: var(--primary-color);
+    transform: translateX(10px);
+}
+
+.sidebar-menu ul li a:active {
+    color: #1e42c0;
+    transform: translateX(10px) scale(0.98);
+}
+
+.sidebar-menu ul li a.active {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: var(--card-bg);
+    padding: 15px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.content-header h1 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.content-area {
+    background-color: var(--card-bg);
+    border-radius: 6px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+#add-employee-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #666;
+}
+
+.form-group input,
+.form-group select {
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.btn-primary, .btn-logout {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-primary {
+    grid-column: span 2;
+}
+
+.btn-primary:hover,
+.btn-logout:hover {
+    background-color: #1e42c0;
+    transform: scale(1.05);
+}
+
+.btn-primary:active, .btn-logout:active {
+    transform: scale(0.95);
+}
+
+.login-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.login-modal.show {
+    display: flex;
+    opacity: 1;
+}
+
+.login-form {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    width: 300px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.login-modal.show .login-form {
+    transform: scale(1);
+}
+
+@media (max-width: 768px) {
+    #add-employee-form {
+        grid-template-columns: 1fr;
+    }
+
+    .btn-primary {
+        grid-column: span 1;
+    }
+}
+
+/* Animation for sidebar menu items */
+.sidebar-menu > li > a {
+    transition: background-color 0.3s ease, transform 0.2s ease, color 0.3s ease;
+}
+
+.sidebar-menu > li > a:hover {
+    transform: translateX(5px);
+    color: var(--primary-color);
+}
+
+.sidebar-menu > li > a:active {
+    transform: translateX(5px) scale(0.98);
+    background-color: rgba(42, 90, 244, 0.2);
+}
+
+.sidebar-menu ul li a {
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.sidebar-menu ul li a:hover {
+    transform: translateX(10px);
+    color: var(--primary-color);
+}
+
+.sidebar-menu ul li a:active {
+    transform: translateX(10px) scale(0.98);
+    color: #1e42c0;
+}

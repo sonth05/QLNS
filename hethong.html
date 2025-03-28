@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="hethong.css">
+</head>
+<body>
+    <!-- App Header --> 
+ <div class="app-header">
+    <div class="logo">
+        <h1>Hệ thống Quản lý Nhân sự</h1>
+    </div>
+    <div class="user-profile" id="user-profile" style="display: none;">
+        <img src="https://via.placeholder.com/40" alt="Avatar" class="user-avatar" id="user-avatar">
+        <div class="dropdown-menu" id="dropdown-menu" style="display: none;">
+            <p id="username-display"></p>
+            <button onclick="handleLogout()">Log Out</button>
+        </div>
+    </div>
+
+<div class="app-container">
+    <div class="sidebar">
+        <ul class="sidebar-menu">
+            <li>
+                <a href="#" class="active">
+                    <i class="fas fa-home"></i> Tổng quan
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showSection('employee-management')">
+                    <i class="fas fa-users"></i> Quản lý nhân viên
+                </a>
+                <ul>
+                    <li><a href="#" onclick="showSection('employee-list')">Thêm danh sách nhân viên</a></li>
+                    <li><a href="#" onclick="showSection('create-account')">Tạo tài khoản hồ sơ nhân viên</a></li>
+                    <li><a href="#" onclick="showSection('update-profile')">Cập nhật hồ sơ nhân viên</a></li>
+                    <li><a href="#" onclick="showSection('view-profile')">Xem thông tin nhân viên</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" onclick="showSection('contract-management')">
+                    <i class="fas fa-file-contract"></i> Quản lý hợp đồng lao động
+                </a>
+                <ul>
+                    <li><a href="#" onclick="showSection('contract-info')">Thông tin hợp đồng</a></li>
+                    <li><a href="#" onclick="showSection('contract-update')">Cập nhật hợp đồng</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" onclick="showSection('insurance-management')">
+                    <i class="fas fa-shield-alt"></i> Quản lý bảo hiểm
+                </a>
+                <ul>
+                    <li><a href="#" onclick="showSection('insurance-management')">Quản lý bảo hiểm</a></li>
+                    <li><a href="#" onclick="showSection('benefit-management')">Quản lý phúc lợi</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" onclick="showSection('work-process')">
+                    <i class="fas fa-road"></i> Quản lý quá trình hoạt động
+                </a>
+                <ul>
+                    <li><a href="#" onclick="showSection('work-assignment')">Quản lý công tác</a></li>
+                    <li><a href="#" onclick="showSection('merit-management')">Quản lý khen thưởng</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" onclick="showSection('training')">
+                    <i class="fas fa-graduation-cap"></i> Quản lý đào tạo
+                </a>
+                <ul>
+                    <li><a href="#" onclick="showSection('employee-training')">Đào tạo nhân viên</a></li>
+                    <li><a href="#" onclick="showSection('course-evaluation')">Đánh giá chuyên môn</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" onclick="showSection('reporting')">
+                    <i class="fas fa-chart-bar"></i> Quản lý thống kê và báo cáo
+                </a>
+                <ul>
+                    <li><a href="#" onclick="showSection('profile-report')">Báo cáo hồ sơ</a></li>
+                    <li><a href="#" onclick="showSection('meeting-report')">Báo cáo họp</a></li>
+                    <li><a href="#" onclick="showSection('salary-report')">Báo cáo phúc lợi</a></li>
+                    <li><a href="#" onclick="showSection('activity-report')">Báo cáo hoạt động</a></li>
+                    <li><a href="#" onclick="showSection('training-report')">Báo cáo đào tạo</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <div class="content-header">
+            <h1>Thêm nhân viên</h1>
+            <button class="btn-primary" id="add-employee-btn">
+                <i class="fas fa-plus"></i> Thêm mới
+            </button>
+        </div>
+        <div class="content-area" id="content-area">
+            <form id="add-employee-form">
+                <div class="form-group">
+                    <label>Mã nhân viên</label>
+                    <input type="text" placeholder="Nhập mã nhân viên">
+                </div>
+                <div class="form-group">
+                    <label>Tên nhân viên</label>
+                    <input type="text" placeholder="Nhập tên nhân viên">
+                </div>
+                <div class="form-group">
+                    <label>Đơn vị</label>
+                    <select>
+                        <option>Chọn đơn vị</option>
+                        <option>Phòng nhân sự</option>
+                        <option>Phòng kỹ thuật</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Chức danh</label>
+                    <input type="text" placeholder="Nhập chức danh">
+                </div>
+                <button type="submit" class="btn-primary">
+                    <i class="fas fa-save"></i> Lưu
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
