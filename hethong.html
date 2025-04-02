@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Hệ thống Quản lý Nhân sự</title>
     <link rel="stylesheet" href="hethong.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <!-- App Header --> 
@@ -28,12 +29,12 @@
         <div class="sidebar">
             <ul class="sidebar-menu">
                 <li>
-                    <a href="#" class="active">
+                    <a href="#" class="active" onclick="showSection('dashboard')">
                         <i class="fas fa-home"></i> Tổng quan
                     </a>
                 </li>
                 <li>
-                    <a href="#" onclick="showSection('employee-management')">
+                    <a href="#" onclick="toggleSubmenu(this)">
                         <i class="fas fa-users"></i> Quản lý nhân viên
                     </a>
                     <ul>
@@ -44,7 +45,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#" onclick="showSection('contract-management')">
+                    <a href="#" onclick="toggleSubmenu(this)">
                         <i class="fas fa-file-contract"></i> Quản lý hợp đồng lao động
                     </a>
                     <ul>
@@ -53,7 +54,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#" onclick="showSection('insurance-management')">
+                    <a href="#" onclick="toggleSubmenu(this)">
                         <i class="fas fa-shield-alt"></i> Quản lý bảo hiểm
                     </a>
                     <ul>
@@ -62,7 +63,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#" onclick="showSection('work-process')">
+                    <a href="#" onclick="toggleSubmenu(this)">
                         <i class="fas fa-road"></i> Quản lý quá trình hoạt động
                     </a>
                     <ul>
@@ -71,7 +72,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#" onclick="showSection('training')">
+                    <a href="#" onclick="toggleSubmenu(this)">
                         <i class="fas fa-graduation-cap"></i> Quản lý đào tạo
                     </a>
                     <ul>
@@ -80,7 +81,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#" onclick="showSection('reporting')">
+                    <a href="#" onclick="toggleSubmenu(this)">
                         <i class="fas fa-chart-bar"></i> Quản lý thống kê và báo cáo
                     </a>
                     <ul>
@@ -95,40 +96,448 @@
         </div>
         <div class="main-content">
             <div class="content-header">
-                <h1>Thêm nhân viên</h1>
+                <h1 id="section-title">Thêm nhân viên</h1>
                 <button class="btn-primary" id="add-employee-btn">
                     <i class="fas fa-plus"></i> Thêm mới
                 </button>
             </div>
             <div class="content-area" id="content-area">
-                <form id="add-employee-form">
-                    <div class="form-group">
-                        <label>Mã nhân viên</label>
-                        <input type="text" placeholder="Nhập mã nhân viên">
+                <!-- Dashboard Section -->
+                <div id="dashboard" class="section">
+                    <h2>Tổng quan hệ thống</h2>
+                    <div class="dashboard-stats">
+                        <div class="stat-card">
+                            <i class="fas fa-users"></i>
+                            <h3>Tổng nhân viên</h3>
+                            <p>250</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-user-plus"></i>
+                            <h3>Nhân viên mới</h3>
+                            <p>15</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-file-contract"></i>
+                            <h3>Hợp đồng</h3>
+                            <p>230</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-shield-alt"></i>
+                            <h3>Bảo hiểm</h3>
+                            <p>220</p>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Tên nhân viên</label>
-                        <input type="text" placeholder="Nhập tên nhân viên">
+                </div>
+
+                <!-- Employee List Section -->
+                <div id="employee-list" class="section" style="display: none;">
+                    <h2>Danh sách nhân viên</h2>
+                    <div class="table-container">
+                        <table id="employees-table">
+                            <thead>
+                                <tr>
+                                    <th>Mã NV</th>
+                                    <th>Họ tên</th>
+                                    <th>Đơn vị</th>
+                                    <th>Chức danh</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>NV001</td>
+                                    <td>Nguyễn Văn A</td>
+                                    <td>Phòng nhân sự</td>
+                                    <td>Trưởng phòng</td>
+                                    <td>
+                                        <button class="btn-action"><i class="fas fa-edit"></i></button>
+                                        <button class="btn-action"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>NV002</td>
+                                    <td>Trần Thị B</td>
+                                    <td>Phòng kỹ thuật</td>
+                                    <td>Nhân viên</td>
+                                    <td>
+                                        <button class="btn-action"><i class="fas fa-edit"></i></button>
+                                        <button class="btn-action"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="form-group">
-                        <label>Đơn vị</label>
-                        <select>
-                            <option>Chọn đơn vị</option>
-                            <option>Phòng nhân sự</option>
-                            <option>Phòng kỹ thuật</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Chức danh</label>
-                        <input type="text" placeholder="Nhập chức danh">
-                    </div>
-                    <button type="submit" class="btn-primary">
-                        <i class="fas fa-save"></i> Lưu
-                    </button>
-                </form>
+                </div>
+
+                <!-- Create Account Section -->
+                <div id="create-account" class="section" style="display: none;">
+                    <h2>Tạo tài khoản nhân viên</h2>
+                    <form id="create-account-form">
+                        <div class="form-group">
+                            <label>Mã nhân viên</label>
+                            <input type="text" placeholder="Nhập mã nhân viên">
+                        </div>
+                        <div class="form-group">
+                            <label>Tên đăng nhập</label>
+                            <input type="text" placeholder="Nhập tên đăng nhập">
+                        </div>
+                        <div class="form-group">
+                            <label>Mật khẩu</label>
+                            <input type="password" placeholder="Nhập mật khẩu">
+                        </div>
+                        <div class="form-group">
+                            <label>Xác nhận mật khẩu</label>
+                            <input type="password" placeholder="Xác nhận mật khẩu">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" placeholder="Nhập email">
+                        </div>
+                        <div class="form-group">
+                            <label>Quyền truy cập</label>
+                            <select>
+                                <option>Quản trị viên</option>
+                                <option>Nhân viên</option>
+                                <option>Quản lý</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-save"></i> Tạo tài khoản
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Add Employee Form -->
+                <div id="add-employee-form-section" class="section">
+                    <form id="add-employee-form">
+                        <div class="form-group">
+                            <label>Mã nhân viên</label>
+                            <input type="text" placeholder="Nhập mã nhân viên">
+                        </div>
+                        <div class="form-group">
+                            <label>Tên nhân viên</label>
+                            <input type="text" placeholder="Nhập tên nhân viên">
+                        </div>
+                        <div class="form-group">
+                            <label>Đơn vị</label>
+                            <select>
+                                <option>Chọn đơn vị</option>
+                                <option>Phòng nhân sự</option>
+                                <option>Phòng kỹ thuật</option>
+                                <option>Phòng kinh doanh</option>
+                                <option>Phòng tài chính</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Chức danh</label>
+                            <input type="text" placeholder="Nhập chức danh">
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày sinh</label>
+                            <input type="date">
+                        </div>
+                        <div class="form-group">
+                            <label>Giới tính</label>
+                            <select>
+                                <option>Chọn giới tính</option>
+                                <option>Nam</option>
+                                <option>Nữ</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Số điện thoại</label>
+                            <input type="tel" placeholder="Nhập số điện thoại">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" placeholder="Nhập email">
+                        </div>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-save"></i> Lưu
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Add other sections as needed -->
+                <div id="update-profile" class="section" style="display: none;">
+                    <h2>Cập nhật hồ sơ nhân viên</h2>
+                    <!-- Content will be similar to add employee form but with loaded data -->
+                </div>
+
+                <div id="view-profile" class="section" style="display: none;">
+                    <h2>Xem thông tin nhân viên</h2>
+                    <!-- Content will be a read-only view of employee data -->
+                </div>
+
+                <div id="contract-info" class="section" style="display: none;">
+                    <h2>Thông tin hợp đồng</h2>
+                    <!-- Contract information content -->
+                </div>
+                
+                <div id="contract-update" class="section" style="display: none;">
+                    <h2>Cập nhật hợp đồng</h2>
+                    <!-- Contract update form -->
+                </div>
+
+                <div id="insurance-management" class="section" style="display: none;">
+                    <h2>Quản lý bảo hiểm</h2>
+                    <!-- Insurance management content -->
+                </div>
+
+                <div id="benefit-management" class="section" style="display: none;">
+                    <h2>Quản lý phúc lợi</h2>
+                    <!-- Benefit management content -->
+                </div>
+
+                <div id="work-assignment" class="section" style="display: none;">
+                    <h2>Quản lý công tác</h2>
+                    <!-- Work assignment content -->
+                </div>
+
+                <div id="merit-management" class="section" style="display: none;">
+                    <h2>Quản lý khen thưởng</h2>
+                    <!-- Merit management content -->
+                </div>
+
+                <div id="employee-training" class="section" style="display: none;">
+                    <h2>Đào tạo nhân viên</h2>
+                    <!-- Employee training content -->
+                </div>
+
+                <div id="course-evaluation" class="section" style="display: none;">
+                    <h2>Đánh giá chuyên môn</h2>
+                    <!-- Course evaluation content -->
+                </div>
+
+                <div id="profile-report" class="section" style="display: none;">
+                    <h2>Báo cáo hồ sơ</h2>
+                    <!-- Profile report content -->
+                </div>
+
+                <div id="meeting-report" class="section" style="display: none;">
+                    <h2>Báo cáo họp</h2>
+                    <!-- Meeting report content -->
+                </div>
+
+                <div id="salary-report" class="section" style="display: none;">
+                    <h2>Báo cáo phúc lợi</h2>
+                    <!-- Salary report content -->
+                </div>
+
+                <div id="activity-report" class="section" style="display: none;">
+                    <h2>Báo cáo hoạt động</h2>
+                    <!-- Activity report content -->
+                </div>
+
+                <div id="training-report" class="section" style="display: none;">
+                    <h2>Báo cáo đào tạo</h2>
+                    <!-- Training report content -->
+                </div>
             </div>
         </div>
     </div>
 
+    <!-- Login Modal -->
+    <div class="login-modal" id="login-modal">
+        <div class="login-form">
+            <h2>Đăng nhập</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label>Tên đăng nhập</label>
+                    <input type="text" id="username" placeholder="Nhập tên đăng nhập">
+                </div>
+                <div class="form-group">
+                    <label>Mật khẩu</label>
+                    <input type="password" id="password" placeholder="Nhập mật khẩu">
+                </div>
+                <button type="submit" class="btn-primary">
+                    <i class="fas fa-sign-in-alt"></i> Đăng nhập
+                </button>
+            </form>
+            <button class="close-btn" id="close-modal">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Mock user data for login demo
+        const users = [
+            { username: 'admin', password: 'admin123', name: 'Quản trị viên' },
+            { username: 'user', password: 'user123', name: 'Người dùng' }
+        ];
+
+        // DOM elements
+        const loginBtn = document.getElementById('login-btn');
+        const logoutBtn = document.getElementById('logout-btn');
+        const userProfile = document.getElementById('user-profile');
+        const loginModal = document.getElementById('login-modal');
+        const closeModal = document.getElementById('close-modal');
+        const loginForm = document.getElementById('login-form');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const usernameDisplay = document.getElementById('username-display');
+        const sectionTitle = document.getElementById('section-title');
+        const addEmployeeBtn = document.getElementById('add-employee-btn');
+
+        // Show login modal
+        loginBtn.addEventListener('click', () => {
+            loginModal.classList.add('show');
+        });
+
+        // Close login modal
+        closeModal.addEventListener('click', () => {
+            loginModal.classList.remove('show');
+        });
+
+        // Handle login form submission
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = usernameInput.value;
+            const password = passwordInput.value;
+            
+            const user = users.find(u => u.username === username && u.password === password);
+            
+            if (user) {
+                // Login successful
+                loginModal.classList.remove('show');
+                loginBtn.style.display = 'none';
+                userProfile.style.display = 'flex';
+                usernameDisplay.textContent = user.name;
+                
+                // Store login state in session storage
+                sessionStorage.setItem('loggedIn', 'true');
+                sessionStorage.setItem('username', user.username);
+                sessionStorage.setItem('displayName', user.name);
+                
+                alert('Đăng nhập thành công!');
+            } else {
+                // Login failed
+                alert('Tên đăng nhập hoặc mật khẩu không đúng!');
+            }
+        });
+
+        // Handle logout
+        logoutBtn.addEventListener('click', () => {
+            loginBtn.style.display = 'flex';
+            userProfile.style.display = 'none';
+            
+            // Clear login state
+            sessionStorage.removeItem('loggedIn');
+            sessionStorage.removeItem('username');
+            sessionStorage.removeItem('displayName');
+            
+            alert('Đã đăng xuất!');
+        });
+
+        // Check login state on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            const isLoggedIn = sessionStorage.getItem('loggedIn') === 'true';
+            if (isLoggedIn) {
+                const displayName = sessionStorage.getItem('displayName');
+                loginBtn.style.display = 'none';
+                userProfile.style.display = 'flex';
+                usernameDisplay.textContent = displayName;
+            }
+            
+            // Show dashboard by default
+            showSection('dashboard');
+        });
+
+        // Toggle submenu visibility
+        function toggleSubmenu(element) {
+            const submenu = element.nextElementSibling;
+            if (submenu.style.display === 'block') {
+                submenu.style.display = 'none';
+            } else {
+                // Hide all other submenus
+                const submenus = document.querySelectorAll('.sidebar-menu ul');
+                submenus.forEach(menu => {
+                    menu.style.display = 'none';
+                });
+                submenu.style.display = 'block';
+            }
+        }
+
+        // Show section content
+        function showSection(sectionId) {
+            // Update active menu item
+            const menuLinks = document.querySelectorAll('.sidebar-menu a');
+            menuLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('onclick') && link.getAttribute('onclick').includes(sectionId)) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Show selected section
+            const selectedSection = document.getElementById(sectionId);
+            if (selectedSection) {
+                selectedSection.style.display = 'block';
+                
+                // Update section title
+                let title = "Tổng quan";
+                switch(sectionId) {
+                    case 'dashboard': title = "Tổng quan hệ thống"; break;
+                    case 'employee-list': title = "Danh sách nhân viên"; break;
+                    case 'create-account': title = "Tạo tài khoản nhân viên"; break;
+                    case 'update-profile': title = "Cập nhật hồ sơ nhân viên"; break;
+                    case 'view-profile': title = "Xem thông tin nhân viên"; break;
+                    case 'contract-info': title = "Thông tin hợp đồng"; break;
+                    case 'contract-update': title = "Cập nhật hợp đồng"; break;
+                    case 'insurance-management': title = "Quản lý bảo hiểm"; break;
+                    case 'benefit-management': title = "Quản lý phúc lợi"; break;
+                    case 'work-assignment': title = "Quản lý công tác"; break;
+                    case 'merit-management': title = "Quản lý khen thưởng"; break;
+                    case 'employee-training': title = "Đào tạo nhân viên"; break;
+                    case 'course-evaluation': title = "Đánh giá chuyên môn"; break;
+                    case 'profile-report': title = "Báo cáo hồ sơ"; break;
+                    case 'meeting-report': title = "Báo cáo họp"; break;
+                    case 'salary-report': title = "Báo cáo phúc lợi"; break;
+                    case 'activity-report': title = "Báo cáo hoạt động"; break;
+                    case 'training-report': title = "Báo cáo đào tạo"; break;
+                    case 'add-employee-form-section': title = "Thêm nhân viên"; break;
+                }
+                sectionTitle.textContent = title;
+
+                // Show/hide action button based on section
+                if (sectionId === 'employee-list') {
+                    addEmployeeBtn.style.display = 'flex';
+                    addEmployeeBtn.innerHTML = '<i class="fas fa-plus"></i> Thêm nhân viên';
+                    addEmployeeBtn.onclick = function() { showSection('add-employee-form-section'); };
+                } else if (sectionId === 'add-employee-form-section') {
+                    addEmployeeBtn.style.display = 'none';
+                } else {
+                    addEmployeeBtn.style.display = 'none';
+                }
+            }
+        }
+
+        // Handle Add Employee button click
+        addEmployeeBtn.addEventListener('click', () => {
+            showSection('add-employee-form-section');
+        });
+
+        // Handle form submissions
+        document.getElementById('add-employee-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Đã lưu thông tin nhân viên!');
+            showSection('employee-list');
+        });
+
+        // Add event listeners for other forms as needed
+        if (document.getElementById('create-account-form')) {
+            document.getElementById('create-account-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Đã tạo tài khoản thành công!');
+            });
+        }
+    </script>
 </body>
 </html>
