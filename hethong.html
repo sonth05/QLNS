@@ -6,6 +6,40 @@
     <title>Hệ thống Quản lý Nhân sự</title>
     <link rel="stylesheet" href="hethong.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Additional styles for user avatar dropdown */
+        .user-avatar-container {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .user-avatar {
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .user-dropdown {
+            position: absolute;
+            top: 45px;
+            right: 0;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            border-radius: 4px;
+            width: 150px;
+            z-index: 100;
+            display: none;
+        }
+
+        .dropdown-item {
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
 </head>
 <body>
     <!-- App Header --> 
@@ -14,11 +48,18 @@
             <h1>Hệ thống Quản lý Nhân sự</h1>
         </div>
         <div class="user-profile" id="user-profile" style="display: none;">
-            <img src="/api/placeholder/40/40" alt="Avatar" class="user-avatar" id="user-avatar">
+            <div class="user-avatar-container">
+                <img src="/api/placeholder/40/40" alt="Avatar" class="user-avatar" id="user-avatar">
+                <div class="user-dropdown" id="user-dropdown">
+                    <div class="dropdown-item" id="view-user-info">
+                        <i class="fas fa-user-circle"></i> Xem thông tin
+                    </div>
+                    <div class="dropdown-item" id="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                    </div>
+                </div>
+            </div>
             <span id="username-display"></span>
-            <button class="btn-logout" id="logout-btn">
-                <i class="fas fa-sign-out-alt"></i> Đăng xuất
-            </button>
         </div>
         <button class="btn-primary" id="login-btn">
             <i class="fas fa-sign-in-alt"></i> Đăng nhập
@@ -267,6 +308,30 @@
                 <div id="view-profile" class="section" style="display: none;">
                     <h2>Xem thông tin nhân viên</h2>
                     <!-- Content will be a read-only view of employee data -->
+                    <div class="user-profile-info">
+                        <div class="profile-header">
+                            <img src="/api/placeholder/100/100" alt="Profile Image" class="profile-image">
+                            <h3 id="profile-name">Tên người dùng</h3>
+                        </div>
+                        <div class="profile-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Tên đăng nhập:</span>
+                                <span class="detail-value" id="profile-username"></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Chức vụ:</span>
+                                <span class="detail-value" id="profile-role"></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Email:</span>
+                                <span class="detail-value" id="profile-email"></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Phòng ban:</span>
+                                <span class="detail-value" id="profile-department"></span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="contract-info" class="section" style="display: none;">
@@ -363,13 +428,12 @@
     <script>
         // Mock user data for login demo
         const users = [
-            { username: 'admin', password: 'admin123', name: 'Quản trị viên' },
-            { username: 'user', password: 'user123', name: 'Người dùng' }
+            { username: 'admin', password: 'admin123', name: 'Quản trị viên', role: 'Administrator', email: 'admin@company.com', department: 'IT' },
+            { username: 'user', password: 'user123', name: 'Người dùng', role: 'User', email: 'user@company.com', department: 'HR' }
         ];
 
         // DOM elements
         const loginBtn = document.getElementById('login-btn');
-        const logoutBtn = document.getElementById('logout-btn');
         const userProfile = document.getElementById('user-profile');
         const loginModal = document.getElementById('login-modal');
         const closeModal = document.getElementById('close-modal');
@@ -379,6 +443,10 @@
         const usernameDisplay = document.getElementById('username-display');
         const sectionTitle = document.getElementById('section-title');
         const addEmployeeBtn = document.getElementById('add-employee-btn');
+        const userAvatar = document.getElementById('user-avatar');
+        const userDropdown = document.getElementById('user-dropdown');
+        const viewUserInfo = document.getElementById('view-user-info');
+        const logoutBtn = document.getElementById('logout-btn');
 
         // Show login modal
         loginBtn.addEventListener('click', () => {
@@ -388,6 +456,38 @@
         // Close login modal
         closeModal.addEventListener('click', () => {
             loginModal.classList.remove('show');
+        });
+
+        // Toggle dropdown when clicking on avatar
+        userAvatar.addEventListener('click', () => {
+            userDropdown.style.display = userDropdown.style.display === 'block' ? 'none' : 'block';
+        });
+        
+        // Close dropdown when clicking elsewhere
+        document.addEventListener('click', (e) => {
+            if (!userAvatar.contains(e.target) && !userDropdown.contains(e.target)) {
+                userDropdown.style.display = 'none';
+            }
+        });
+        
+        // View user info action
+        viewUserInfo.addEventListener('click', () => {
+            userDropdown.style.display = 'none';
+            // Get username from session storage
+            const username = sessionStorage.getItem('username');
+            const user = users.find(u => u.username === username);
+            
+            // Show profile section
+            showSection('view-profile');
+            
+            // Fill profile information with user data
+            if (user) {
+                document.getElementById('profile-name').textContent = user.name;
+                document.getElementById('profile-username').textContent = user.username;
+                document.getElementById('profile-role').textContent = user.role;
+                document.getElementById('profile-email').textContent = user.email;
+                document.getElementById('profile-department').textContent = user.department;
+            }
         });
 
         // Handle login form submission
@@ -421,6 +521,7 @@
         logoutBtn.addEventListener('click', () => {
             loginBtn.style.display = 'flex';
             userProfile.style.display = 'none';
+            userDropdown.style.display = 'none';
             
             // Clear login state
             sessionStorage.removeItem('loggedIn');
