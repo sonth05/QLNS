@@ -120,6 +120,32 @@
                 notification.classList.remove('active');
             }, 3000);
         }
+
+        function handleLogin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Mock user data for login validation
+            const users = [
+                { username: 'admin', password: 'admin123', name: 'Quản trị viên', avatar: 'avatar.jpg' },
+                { username: 'user', password: 'user123', name: 'Người dùng', avatar: 'avatar2.jpg' }
+            ];
+
+            const user = users.find(u => u.username === username && u.password === password);
+
+            if (user) {
+                // Store user data in session storage
+                sessionStorage.setItem('loggedIn', 'true');
+                sessionStorage.setItem('username', user.username);
+                sessionStorage.setItem('name', user.name);
+                sessionStorage.setItem('avatar', user.avatar);
+
+                // Redirect to sample.html
+                window.location.href = 'sample.html';
+            } else {
+                showNotification('Tên đăng nhập hoặc mật khẩu không đúng!');
+            }
+        }
     </script>
  
 </body>
