@@ -1,97 +1,64 @@
-function showRegister() {
-    document.getElementById('login-form').classList.remove('active');
-    document.getElementById('register-form').classList.add('active');
+// Giả sử sau khi xác thực đăng nhập thành công
+function onLoginSuccess(username, avatarUrl) {
+    // Ẩn nút đăng nhập
+    document.getElementById("login-btn").style.display = "none";
+
+    // Hiện phần avatar
+    const userProfile = document.getElementById("user-profile");
+    userProfile.style.display = "flex"; // hoặc "block" tùy layout
+
+    // Gán tên người dùng và avatar
+    document.getElementById("username-display").textContent = username;
+    document.getElementById("user-avatar").src = avatarUrl || "/api/placeholder/40/40";
+
+    // Ẩn/hiện dropdown khi click avatar
+    const avatarContainer = document.querySelector('.user-avatar-container');
+    avatarContainer.onclick = () => {
+        const dropdown = document.getElementById("user-dropdown");
+        dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    };
 }
 
-function showLogin() {
-    document.getElementById('register-form').classList.remove('active');
-    document.getElementById('login-form').classList.add('active');
-}
+// Giả sử gọi hàm này khi user đã đăng nhập
+onLoginSuccess("Nguyễn Văn A", "/images/avatar1.png");
 
-function handleLogin() {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+        const userAvatar = document.getElementById('user-avatar');
+        const userDropdown = document.getElementById('user-dropdown');
 
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    const user = users.find(user => user.username === username && user.password === password);
+        // Toggle dropdown visibility
+        userAvatar.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent click from propagating to document
+            userDropdown.style.display = userDropdown.style.display === 'block' ? 'none' : 'block';
+        });
 
-    if (user) {
-        localStorage.setItem('loggedInUser', JSON.stringify(user));
-        window.location.href = 'hethong.html'; // Redirect to the dashboard page
-    } else {
-        showNotification('Invalid username or password.');
-    }
-}
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+            userDropdown.style.display = 'none';
+        });
 
-// Initialize a sample account
-function initializeSampleAccount() {
-    const sampleUsers = [
-        {
-            username: "admin",
-            email: "admin@example.com",
-            password: "1234"
+        // Handle dropdown options
+        document.getElementById('profile-option').addEventListener('click', () => {
+            alert('Navigating to Profile...');
+            // Add navigation logic here
+        });
+
+        document.getElementById('settings-option').addEventListener('click', () => {
+            alert('Navigating to Settings...');
+            // Add navigation logic here
+        });
+
+        document.getElementById('logout-option').addEventListener('click', () => {
+            alert('Logging out...');
+            // Add logout logic here
+        });
+    const avatar = document.getElementById('user-avatar');
+    const dropdown = document.getElementById('user-dropdown');
+
+    document.addEventListener('click', function (e) {
+        if (avatar.contains(e.target)) {
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        } else {
+            dropdown.style.display = 'none';
         }
-    ];
+    });
 
-    // Check if users already exist in localStorage
-    if (!localStorage.getItem("users")) {
-        localStorage.setItem("users", JSON.stringify(sampleUsers));
-    }
-}
-
-// Call the function to initialize the sample account
-initializeSampleAccount();
-if (user) {
-    localStorage.setItem('loggedInUser', JSON.stringify(user));
-    alert('Login successful!');
-    window.location.href = 'hethong.html';
-}
-
-function handleRegister() {
-    const username = document.getElementById('register-username').value;
-    const email = document.getElementById('register-email').value;
-    const password = document.getElementById('register-password').value;
-    const confirmPassword = document.getElementById('register-confirm-password').value;
-
-    if (password !== confirmPassword) {
-        alert('Passwords do not match.');
-        return;
-    }
-
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    const userExists = users.some(user => user.username === username);
-
-    if (userExists) {
-        alert('Username already exists.');
-        return;
-    }
-
-    users.push({ username, email, password });
-    localStorage.setItem('users', JSON.stringify(users));
-
-    alert('Registration successful! You can now log in.');
-    showLogin();
-}
-// Display the logged-in user's information
-function displayUserProfile() {
-    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
-    if (loggedInUser) {
-        document.getElementById('user-profile').style.display = 'inline-block';
-        document.getElementById('username-display').textContent = `Welcome, ${loggedInUser.username}`;
-    }
-}
-
-// Toggle the dropdown menu
-document.getElementById('user-profile').addEventListener('click', () => {
-    const dropdownMenu = document.getElementById('dropdown-menu');
-    dropdownMenu.style.display = dropdownMenu.style.display === 'none' ? 'block' : 'none';
-});
-
-// Handle logout
-function handleLogout() {
-    localStorage.removeItem('loggedInUser');
-    window.location.href = 'login.html'; // Redirect to the login page
-}
-
-// Call the function to display the user profile on page load
-document.addEventListener('DOMContentLoaded', displayUserProfile);
