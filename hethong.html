@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="hethong.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="hethong.js">
+   
 </head>
 <body>
     <!-- App Header --> 
@@ -16,16 +17,19 @@
         </div>
         <div class="user-profile">
             <div class="user-avatar-container" id="user-avatar-container">
-                <div class="user-avatar" id="user-avatar">S</div>
-                <div class="user-dropdown" id="user-dropdown">
-                    <div class="dropdown-item" id="view-user-info">
-                        <i class="fas fa-user-circle"></i> Xem thông tin
+                <img src="avatar.jpg" alt="User Avatar" class="user-avatar" id="user-avatar">
+                <div class="user-dropdown" id="user-dropdown" style="display: none;">
+                    <div class="dropdown-item" id="profile-option">
+                        <i class="fas fa-user"></i> Profile
                     </div>
-                    <div class="dropdown-item" id="logout-btn">
-                        <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                    <div class="dropdown-item" id="settings-option">
+                        <i class="fas fa-cog"></i> Settings
+                    </div>
+                    <div class="dropdown-item" id="logout-option">
+                        <i class="fas fa-sign-out-alt"></i> Logout
                     </div>
                 </div>
-            </div>
+            </div>  
         </div>
     </div>
 
@@ -113,22 +117,22 @@
                         <div class="stat-card">
                             <i class="fas fa-users"></i>
                             <h3>Tổng nhân viên</h3>
-                            <p>250</p>
+                            <p>10</p> <!-- Updated to match the number of employees in the code -->
                         </div>
                         <div class="stat-card">
                             <i class="fas fa-user-plus"></i>
                             <h3>Nhân viên mới</h3>
-                            <p>15</p>
+                            <p>2</p> <!-- Updated to reflect the number of new employees -->
                         </div>
                         <div class="stat-card">
                             <i class="fas fa-file-contract"></i>
                             <h3>Hợp đồng</h3>
-                            <p>230</p>
+                            <p>10</p> <!-- Updated to match the number of contracts in the code -->
                         </div>
                         <div class="stat-card">
                             <i class="fas fa-shield-alt"></i>
                             <h3>Bảo hiểm</h3>
-                            <p>220</p>
+                            <p>10</p> <!-- Updated to reflect the number of employees with insurance -->
                         </div>
                     </div>
                 </div>
@@ -396,31 +400,31 @@
 
                 <div id="view-profile" class="section" style="display: none;">
                     <h2>Xem thông tin nhân viên</h2>
-                    <!-- Content will be a read-only view of employee data -->
                     <div class="user-profile-info">
                         <div class="profile-header">
-                            <img src="/api/placeholder/100/100" alt="Profile Image" class="profile-image">
-                            <h3 id="profile-name">Tên người dùng</h3>
+                            <img src="images/avatar.jpg" class="profile-image" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+                            <h3 id="profile-name">Sơn Nguyễn</h3>
                         </div>
                         <div class="profile-details">
                             <div class="detail-item">
                                 <span class="detail-label">Tên đăng nhập:</span>
-                                <span class="detail-value" id="profile-username"></span>
+                                <span class="detail-value" id="profile-username">Nguyễn Thành Sơn</span>
                             </div>
                             <div class="detail-item">
                                 <span class="detail-label">Chức vụ:</span>
-                                <span class="detail-value" id="profile-role"></span>
+                                <span class="detail-value" id="profile-role">Trưởng phòng IT</span>
                             </div>
                             <div class="detail-item">
                                 <span class="detail-label">Email:</span>
-                                <span class="detail-value" id="profile-email"></span>
+                                <span class="detail-value" id="profile-email">sonnguyenthanh1205@gmail.com</span>
                             </div>
                             <div class="detail-item">
                                 <span class="detail-label">Phòng ban:</span>
-                                <span class="detail-value" id="profile-department"></span>
+                                <span class="detail-value" id="profile-department">Kỹ thuật</span>
                             </div>
                         </div>
                     </div>
+                </div>
                 </div>
 
                 <div id="contract-info" class="section" style="display: none;">
@@ -444,8 +448,8 @@
                                     <td>HD001</td>
                                     <td>Nguyễn Văn A</td>
                                     <td>Trưởng phòng</td>
-                                    <td>2023-01-01</td>
-                                    <td>2023-12-31</td>
+                                    <td>2024-01-01</td>
+                                    <td>2025-12-31</td>
                                     <td>Hợp đồng chính thức</td>
                                     <td>20,000,000</td>
                                     <td>
@@ -457,21 +461,20 @@
                                     <td>HD002</td>
                                     <td>Trần Thị B</td>
                                     <td>Nhân viên</td>
-                                    <td>2023-02-01</td>
-                                    <td>2023-08-31</td>
+                                    <td>2024-02-01</td>
+                                    <td>2025-06-30</td>
                                     <td>Hợp đồng thử việc</td>
                                     <td>15,000,000</td>
                                     <td>
-                                        <button class="btn-action"><i class="fas fa-edit"></i></button>
-                                        <button class="btn-action"><i class="fas fa-trash"></i></button>
+                                        <span class="status pending">Đã kết thúc</span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>HD003</td>
                                     <td>Phạm Văn C</td>
                                     <td>Nhân viên</td>
-                                    <td>2023-03-01</td>
-                                    <td>2023-12-31</td>
+                                    <td>2024-03-01</td>
+                                    <td>2025-12-31</td>
                                     <td>Hợp đồng chính thức</td>
                                     <td>18,000,000</td>
                                     <td>
@@ -483,8 +486,8 @@
                                     <td>HD004</td>
                                     <td>Hoàng Thị D</td>
                                     <td>Kế toán</td>
-                                    <td>2023-01-15</td>
-                                    <td>2023-12-15</td>
+                                    <td>2024-01-15</td>
+                                    <td>2025-12-15</td>
                                     <td>Hợp đồng chính thức</td>
                                     <td>22,000,000</td>
                                     <td>
@@ -496,21 +499,20 @@
                                     <td>HD005</td>
                                     <td>Nguyễn Văn E</td>
                                     <td>Nhân viên</td>
-                                    <td>2023-04-01</td>
-                                    <td>2023-10-31</td>
+                                    <td>2024-04-01</td>
+                                    <td>2025-03-31</td>
                                     <td>Hợp đồng thời vụ</td>
                                     <td>14,000,000</td>
                                     <td>
-                                        <button class="btn-action"><i class="fas fa-edit"></i></button>
-                                        <button class="btn-action"><i class="fas fa-trash"></i></button>
+                                        <span class="status pending">Đã kết thúc</span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>HD006</td>
                                     <td>Trần Thị F</td>
                                     <td>Kỹ sư</td>
-                                    <td>2023-05-01</td>
-                                    <td>2023-11-30</td>
+                                    <td>2024-05-01</td>
+                                    <td>2025-11-30</td>
                                     <td>Hợp đồng thử việc</td>
                                     <td>16,000,000</td>
                                     <td>
@@ -522,8 +524,8 @@
                                     <td>HD007</td>
                                     <td>Phạm Văn G</td>
                                     <td>Nhân viên</td>
-                                    <td>2023-06-01</td>
-                                    <td>2023-12-31</td>
+                                    <td>2024-06-01</td>
+                                    <td>2025-12-31</td>
                                     <td>Hợp đồng chính thức</td>
                                     <td>17,000,000</td>
                                     <td>
@@ -535,8 +537,8 @@
                                     <td>HD008</td>
                                     <td>Hoàng Thị H</td>
                                     <td>Kế toán</td>
-                                    <td>2023-07-01</td>
-                                    <td>2023-12-31</td>
+                                    <td>2024-07-01</td>
+                                    <td>2025-12-31</td>
                                     <td>Hợp đồng chính thức</td>
                                     <td>21,000,000</td>
                                     <td>
@@ -548,8 +550,8 @@
                                     <td>HD009</td>
                                     <td>Nguyễn Văn I</td>
                                     <td>Nhân viên</td>
-                                    <td>2023-08-01</td>
-                                    <td>2023-12-31</td>
+                                    <td>2024-08-01</td>
+                                    <td>2025-12-31</td>
                                     <td>Hợp đồng thời vụ</td>
                                     <td>13,000,000</td>
                                     <td>
@@ -561,8 +563,8 @@
                                     <td>HD010</td>
                                     <td>Trần Thị J</td>
                                     <td>Kỹ sư</td>
-                                    <td>2023-09-01</td>
-                                    <td>2023-12-31</td>
+                                    <td>2024-09-01</td>
+                                    <td>2025-12-31</td>
                                     <td>Hợp đồng thử việc</td>
                                     <td>19,000,000</td>
                                     <td>
@@ -862,7 +864,21 @@
                         </button>
                     </form>
                     <div class="report-container">
-                        <!-- Report content will be dynamically generated -->
+                        <table id="expiring-contracts-table" style="display: none;">
+                            <thead>
+                                <tr>
+                                    <th>Mã NV</th>
+                                    <th>Họ tên</th>
+                                    <th>Chức danh</th>
+                                    <th>Ngày bắt đầu</th>
+                                    <th>Ngày kết thúc</th>
+                                    <th>Loại hợp đồng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Rows will be dynamically generated -->
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
@@ -1021,6 +1037,17 @@
         // Close login modal
         closeModal.addEventListener('click', () => {
             loginModal.classList.remove('show');
+        });
+
+        // Toggle dropdown visibility
+        userAvatar.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent click from propagating to document
+            userDropdown.style.display = userDropdown.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+            userDropdown.style.display = 'none';
         });
 
         // Toggle dropdown when clicking on avatar
@@ -1204,6 +1231,39 @@
                 alert('Đã tạo tài khoản thành công!');
             });
         }
+
+        document.getElementById('meeting-report-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const table = document.getElementById('expiring-contracts-table');
+            const tbody = table.querySelector('tbody');
+
+            // Clear existing rows
+            tbody.innerHTML = '';
+
+            // Mock data for demonstration
+            const expiringContracts = [
+                { id: 'NV001', name: 'Nguyễn Văn A', position: 'Trưởng phòng', startDate: '2023-01-01', endDate: '2023-12-01', type: 'Chính thức' },
+                { id: 'NV002', name: 'Trần Thị B', position: 'Nhân viên', startDate: '2023-02-01', endDate: '2023-12-05', type: 'Thử việc' }
+            ];
+
+            // Populate table with data
+            expiringContracts.forEach(contract => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${contract.id}</td>
+                    <td>${contract.name}</td>
+                    <td>${contract.position}</td>
+                    <td>${contract.startDate}</td>
+                    <td>${contract.endDate}</td>
+                    <td>${contract.type}</td>
+                `;
+                tbody.appendChild(row);
+            });
+
+            // Show the table
+            table.style.display = 'table';
+        });
     </script>
 </body>
 </html>
+
