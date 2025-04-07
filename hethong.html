@@ -6,40 +6,7 @@
     <title>Hệ thống Quản lý Nhân sự</title>
     <link rel="stylesheet" href="hethong.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
-        /* Additional styles for user avatar dropdown */
-        .user-avatar-container {
-            position: relative;
-            cursor: pointer;
-        }
-
-        .user-avatar {
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
-        .user-dropdown {
-            position: absolute;
-            top: 45px;
-            right: 0;
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            border-radius: 4px;
-            width: 150px;
-            z-index: 100;
-            display: none;
-        }
-
-        .dropdown-item {
-            padding: 10px 15px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .dropdown-item:hover {
-            background-color: #f5f5f5;
-        }
-    </style>
+    <link rel="stylesheet" href="hethong.js">
 </head>
 <body>
     <!-- App Header --> 
@@ -47,9 +14,9 @@
         <div class="logo">
             <h1>Hệ thống Quản lý Nhân sự</h1>
         </div>
-        <div class="user-profile" id="user-profile" style="display: none;">
-            <div class="user-avatar-container">
-                <img src="/api/placeholder/40/40" alt="Avatar" class="user-avatar" id="user-avatar">
+        <div class="user-profile">
+            <div class="user-avatar-container" id="user-avatar-container">
+                <div class="user-avatar" id="user-avatar">S</div>
                 <div class="user-dropdown" id="user-dropdown">
                     <div class="dropdown-item" id="view-user-info">
                         <i class="fas fa-user-circle"></i> Xem thông tin
@@ -59,7 +26,8 @@
                     </div>
                 </div>
             </div>
-            <span id="username-display"></span>
+        </div>
+    </div>
 
     <div class="app-container">
         <div class="sidebar">
@@ -200,6 +168,86 @@
                                         <button class="btn-action"><i class="fas fa-trash"></i></button>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>NV003</td>
+                                    <td>Phạm Văn C</td>
+                                    <td>Phòng kinh doanh</td>
+                                    <td>Nhân viên</td>
+                                    <td>
+                                        <button class="btn-action"><i class="fas fa-edit"></i></button>
+                                        <button class="btn-action"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>NV004</td>
+                                    <td>Hoàng Thị D</td>
+                                    <td>Phòng tài chính</td>
+                                    <td>Kế toán</td>
+                                    <td>
+                                        <button class="btn-action"><i class="fas fa-edit"></i></button>
+                                        <button class="btn-action"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>NV005</td>
+                                    <td>Nguyễn Văn E</td>
+                                    <td>Phòng nhân sự</td>
+                                    <td>Nhân viên</td>
+                                    <td>
+                                        <button class="btn-action"><i class="fas fa-edit"></i></button>
+                                        <button class="btn-action"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>NV006</td>
+                                    <td>Trần Thị F</td>
+                                    <td>Phòng kỹ thuật</td>
+                                    <td>Kỹ sư</td>
+                                    <td>
+                                        <button class="btn-action"><i class="fas fa-edit"></i></button>
+                                        <button class="btn-action"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>NV007</td>
+                                    <td>Phạm Văn G</td>
+                                    <td>Phòng kinh doanh</td>
+                                    <td>Nhân viên</td>
+                                    <td>
+                                        <button class="btn-action"><i class="fas fa-edit"></i></button>
+                                        <button class="btn-action"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>NV008</td>
+                                    <td>Hoàng Thị H</td>
+                                    <td>Phòng tài chính</td>
+                                    <td>Kế toán</td>
+                                    <td>
+                                        <button class="btn-action"><i class="fas fa-edit"></i></button>
+                                        <button class="btn-action"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>NV009</td>
+                                    <td>Nguyễn Văn I</td>
+                                    <td>Phòng nhân sự</td>
+                                    <td>Nhân viên</td>
+                                    <td>
+                                        <button class="btn-action"><i class="fas fa-edit"></i></button>
+                                        <button class="btn-action"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>NV010</td>
+                                    <td>Trần Thị J</td>
+                                    <td>Phòng kỹ thuật</td>
+                                    <td>Kỹ sư</td>
+                                    <td>
+                                        <button class="btn-action"><i class="fas fa-edit"></i></button>
+                                        <button class="btn-action"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -297,7 +345,53 @@
                 <!-- Add other sections as needed -->
                 <div id="update-profile" class="section" style="display: none;">
                     <h2>Cập nhật hồ sơ nhân viên</h2>
-                    <!-- Content will be similar to add employee form but with loaded data -->
+                    <form id="update-profile-form">
+                        <div class="form-group">
+                            <label>Mã nhân viên</label>
+                            <input type="text" placeholder="Nhập mã nhân viên" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label>Tên nhân viên</label>
+                            <input type="text" placeholder="Nhập tên nhân viên">
+                        </div>
+                        <div class="form-group">
+                            <label>Đơn vị</label>
+                            <select>
+                                <option>Chọn đơn vị</option>
+                                <option>Phòng nhân sự</option>
+                                <option>Phòng kỹ thuật</option>
+                                <option>Phòng kinh doanh</option>
+                                <option>Phòng tài chính</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Chức danh</label>
+                            <input type="text" placeholder="Nhập chức danh">
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày sinh</label>
+                            <input type="date">
+                        </div>
+                        <div class="form-group">
+                            <label>Giới tính</label>
+                            <select>
+                                <option>Chọn giới tính</option>
+                                <option>Nam</option>
+                                <option>Nữ</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Số điện thoại</label>
+                            <input type="tel" placeholder="Nhập số điện thoại">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" placeholder="Nhập email">
+                        </div>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-save"></i> Cập nhật hồ sơ
+                        </button>
+                    </form>
                 </div>
 
                 <div id="view-profile" class="section" style="display: none;">
@@ -331,42 +425,396 @@
 
                 <div id="contract-info" class="section" style="display: none;">
                     <h2>Thông tin hợp đồng</h2>
-                    <!-- Contract information content -->
+                    <div class="contract-list">
+                        <table id="contract-table">
+                            <thead>
+                                <tr>
+                                    <th>Mã hợp đồng</th>
+                                    <th>Tên nhân viên</th>
+                                    <th>Chức danh</th>
+                                    <th>Ngày bắt đầu</th>
+                                    <th>Ngày kết thúc</th>
+                                    <th>Loại hợp đồng</th>
+                                    <th>Mức lương</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>HD001</td>
+                                    <td>Nguyễn Văn A</td>
+                                    <td>Trưởng phòng</td>
+                                    <td>2023-01-01</td>
+                                    <td>2023-12-31</td>
+                                    <td>Hợp đồng chính thức</td>
+                                    <td>20,000,000</td>
+                                    <td>
+                                        <button class="btn-action"><i class="fas fa-edit"></i></button>
+                                        <button class="btn-action"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>HD002</td>
+                                    <td>Trần Thị B</td>
+                                    <td>Nhân viên</td>
+                                    <td>2023-02-01</td>
+                                    <td>2023-08-31</td>
+                                    <td>Hợp đồng thử việc</td>
+                                    <td>15,000,000</td>
+                                    <td>
+                                        <button class="btn-action"><i class="fas fa-edit"></i></button>
+                                        <button class="btn-action"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>HD003</td>
+                                    <td>Phạm Văn C</td>
+                                    <td>Nhân viên</td>
+                                    <td>2023-03-01</td>
+                                    <td>2023-12-31</td>
+                                    <td>Hợp đồng chính thức</td>
+                                    <td>18,000,000</td>
+                                    <td>
+                                        <button class="btn-action"><i class="fas fa-edit"></i></button>
+                                        <button class="btn-action"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>HD004</td>
+                                    <td>Hoàng Thị D</td>
+                                    <td>Kế toán</td>
+                                    <td>2023-01-15</td>
+                                    <td>2023-12-15</td>
+                                    <td>Hợp đồng chính thức</td>
+                                    <td>22,000,000</td>
+                                    <td>
+                                        <button class="btn-action"><i class="fas fa-edit"></i></button>
+                                        <button class="btn-action"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>HD005</td>
+                                    <td>Nguyễn Văn E</td>
+                                    <td>Nhân viên</td>
+                                    <td>2023-04-01</td>
+                                    <td>2023-10-31</td>
+                                    <td>Hợp đồng thời vụ</td>
+                                    <td>14,000,000</td>
+                                    <td>
+                                        <button class="btn-action"><i class="fas fa-edit"></i></button>
+                                        <button class="btn-action"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>HD006</td>
+                                    <td>Trần Thị F</td>
+                                    <td>Kỹ sư</td>
+                                    <td>2023-05-01</td>
+                                    <td>2023-11-30</td>
+                                    <td>Hợp đồng thử việc</td>
+                                    <td>16,000,000</td>
+                                    <td>
+                                        <button class="btn-action"><i class="fas fa-edit"></i></button>
+                                        <button class="btn-action"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>HD007</td>
+                                    <td>Phạm Văn G</td>
+                                    <td>Nhân viên</td>
+                                    <td>2023-06-01</td>
+                                    <td>2023-12-31</td>
+                                    <td>Hợp đồng chính thức</td>
+                                    <td>17,000,000</td>
+                                    <td>
+                                        <button class="btn-action"><i class="fas fa-edit"></i></button>
+                                        <button class="btn-action"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>HD008</td>
+                                    <td>Hoàng Thị H</td>
+                                    <td>Kế toán</td>
+                                    <td>2023-07-01</td>
+                                    <td>2023-12-31</td>
+                                    <td>Hợp đồng chính thức</td>
+                                    <td>21,000,000</td>
+                                    <td>
+                                        <button class="btn-action"><i class="fas fa-edit"></i></button>
+                                        <button class="btn-action"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>HD009</td>
+                                    <td>Nguyễn Văn I</td>
+                                    <td>Nhân viên</td>
+                                    <td>2023-08-01</td>
+                                    <td>2023-12-31</td>
+                                    <td>Hợp đồng thời vụ</td>
+                                    <td>13,000,000</td>
+                                    <td>
+                                        <button class="btn-action"><i class="fas fa-edit"></i></button>
+                                        <button class="btn-action"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>HD010</td>
+                                    <td>Trần Thị J</td>
+                                    <td>Kỹ sư</td>
+                                    <td>2023-09-01</td>
+                                    <td>2023-12-31</td>
+                                    <td>Hợp đồng thử việc</td>
+                                    <td>19,000,000</td>
+                                    <td>
+                                        <button class="btn-action"><i class="fas fa-edit"></i></button>
+                                        <button class="btn-action"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 
                 <div id="contract-update" class="section" style="display: none;">
                     <h2>Cập nhật hợp đồng</h2>
-                    <!-- Contract update form -->
+                    <form id="contract-template-form">
+                        <div class="form-group">
+                            <label>Mã hợp đồng</label>
+                            <input type="text" placeholder="Nhập mã hợp đồng">
+                        </div>
+                        <div class="form-group">
+                            <label>Tên nhân viên</label>
+                            <input type="text" placeholder="Nhập tên nhân viên">
+                        </div>
+                        <div class="form-group">
+                            <label>Chức danh</label>
+                            <input type="text" placeholder="Nhập chức danh">
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày bắt đầu</label>
+                            <input type="date">
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày kết thúc</label>
+                            <input type="date">
+                        </div>
+                        <div class="form-group">
+                            <label>Loại hợp đồng</label>
+                            <select>
+                                <option>Hợp đồng thử việc</option>
+                                <option>Hợp đồng chính thức</option>
+                                <option>Hợp đồng thời vụ</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Mức lương</label>
+                            <input type="number" placeholder="Nhập mức lương">
+                        </div>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-save"></i> Lưu hợp đồng
+                        </button>
+                    </form>
                 </div>
 
                 <div id="insurance-management" class="section" style="display: none;">
                     <h2>Quản lý bảo hiểm</h2>
-                    <!-- Insurance management content -->
+                    <form id="insurance-management-form">
+                        <div class="form-group">
+                            <label>Mã bảo hiểm</label>
+                            <input type="text" placeholder="Nhập mã bảo hiểm">
+                        </div>
+                        <div class="form-group">
+                            <label>Tên nhân viên</label>
+                            <input type="text" placeholder="Nhập tên nhân viên">
+                        </div>
+                        <div class="form-group">
+                            <label>Loại bảo hiểm</label>
+                            <select>
+                                <option>Bảo hiểm xã hội</option>
+                                <option>Bảo hiểm y tế</option>
+                                <option>Bảo hiểm thất nghiệp</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày bắt đầu</label>
+                            <input type="date">
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày kết thúc</label>
+                            <input type="date">
+                        </div>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-save"></i> Lưu bảo hiểm
+                        </button>
+                    </form>
                 </div>
 
                 <div id="benefit-management" class="section" style="display: none;">
                     <h2>Quản lý phúc lợi</h2>
-                    <!-- Benefit management content -->
+                    <form id="benefit-management-form">
+                        <div class="form-group">
+                            <label>Mã phúc lợi</label>
+                            <input type="text" placeholder="Nhập mã phúc lợi">
+                        </div>
+                        <div class="form-group">
+                            <label>Tên nhân viên</label>
+                            <input type="text" placeholder="Nhập tên nhân viên">
+                        </div>
+                        <div class="form-group">
+                            <label>Loại phúc lợi</label>
+                            <select>
+                                <option>Thưởng lễ tết</option>
+                                <option>Hỗ trợ đi lại</option>
+                                <option>Hỗ trợ ăn trưa</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Số tiền</label>
+                            <input type="number" placeholder="Nhập số tiền">
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày cấp</label>
+                            <input type="date">
+                        </div>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-save"></i> Lưu phúc lợi
+                        </button>
+                    </form>
                 </div>
 
                 <div id="work-assignment" class="section" style="display: none;">
                     <h2>Quản lý công tác</h2>
-                    <!-- Work assignment content -->
+                    <form id="work-assignment-form">
+                        <div class="form-group">
+                            <label>Mã công tác</label>
+                            <input type="text" placeholder="Nhập mã công tác">
+                        </div>
+                        <div class="form-group">
+                            <label>Tên nhân viên</label>
+                            <input type="text" placeholder="Nhập tên nhân viên">
+                        </div>
+                        <div class="form-group">
+                            <label>Địa điểm công tác</label>
+                            <input type="text" placeholder="Nhập địa điểm công tác">
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày bắt đầu</label>
+                            <input type="date">
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày kết thúc</label>
+                            <input type="date">
+                        </div>
+                        <div class="form-group">
+                            <label>Mục đích công tác</label>
+                            <textarea placeholder="Nhập mục đích công tác"></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-save"></i> Lưu công tác
+                        </button>
+                    </form>
                 </div>
 
                 <div id="merit-management" class="section" style="display: none;">
                     <h2>Quản lý khen thưởng</h2>
-                    <!-- Merit management content -->
+                    <form id="merit-management-form">
+                        <div class="form-group">
+                            <label>Mã khen thưởng</label>
+                            <input type="text" placeholder="Nhập mã khen thưởng">
+                        </div>
+                        <div class="form-group">
+                            <label>Tên nhân viên</label>
+                            <input type="text" placeholder="Nhập tên nhân viên">
+                        </div>
+                        <div class="form-group">
+                            <label>Loại khen thưởng</label>
+                            <select>
+                                <option>Thưởng hiệu suất</option>
+                                <option>Thưởng sáng kiến</option>
+                                <option>Thưởng dự án</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Số tiền</label>
+                            <input type="number" placeholder="Nhập số tiền">
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày khen thưởng</label>
+                            <input type="date">
+                        </div>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-save"></i> Lưu khen thưởng
+                        </button>
+                    </form>
                 </div>
 
                 <div id="employee-training" class="section" style="display: none;">
                     <h2>Đào tạo nhân viên</h2>
-                    <!-- Employee training content -->
+                    <div class="table-container">
+                        <table id="employee-training-table">
+                            <thead>
+                                <tr>
+                                    <th>Mã đào tạo</th>
+                                    <th>Tên khóa học</th>
+                                    <th>Nhân viên tham gia</th>
+                                    <th>Ngày bắt đầu</th>
+                                    <th>Ngày kết thúc</th>
+                                    <th>Trạng thái</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>DT001</td>
+                                    <td>Kỹ năng giao tiếp</td>
+                                    <td>Nguyễn Văn A</td>
+                                    <td>2023-01-10</td>
+                                    <td>2023-01-20</td>
+                                    <td>Hoàn thành</td>
+                                </tr>
+                                <tr>
+                                    <td>DT002</td>
+                                    <td>Quản lý dự án</td>
+                                    <td>Trần Thị B</td>
+                                    <td>2023-02-01</td>
+                                    <td>2023-02-15</td>
+                                    <td>Đang diễn ra</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
                 <div id="course-evaluation" class="section" style="display: none;">
                     <h2>Đánh giá chuyên môn</h2>
-                    <!-- Course evaluation content -->
+                    <div class="table-container">
+                        <table id="course-evaluation-table">
+                            <thead>
+                                <tr>
+                                    <th>Mã đánh giá</th>
+                                    <th>Tên nhân viên</th>
+                                    <th>Khóa học</th>
+                                    <th>Điểm số</th>
+                                    <th>Nhận xét</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>DG001</td>
+                                    <td>Nguyễn Văn A</td>
+                                    <td>Kỹ năng giao tiếp</td>
+                                    <td>85</td>
+                                    <td>Tốt</td>
+                                </tr>
+                                <tr>
+                                    <td>DG002</td>
+                                    <td>Trần Thị B</td>
+                                    <td>Quản lý dự án</td>
+                                    <td>90</td>
+                                    <td>Xuất sắc</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
                 <div id="profile-report" class="section" style="display: none;">
@@ -442,6 +890,7 @@
         const userDropdown = document.getElementById('user-dropdown');
         const viewUserInfo = document.getElementById('view-user-info');
         const logoutBtn = document.getElementById('logout-btn');
+        const userAvatarContainer = document.getElementById('user-avatar-container');
 
         // Show login modal
         loginBtn.addEventListener('click', () => {
@@ -514,16 +963,9 @@
 
         // Handle logout
         logoutBtn.addEventListener('click', () => {
-            loginBtn.style.display = 'flex';
-            userProfile.style.display = 'none';
-            userDropdown.style.display = 'none';
-            
-            // Clear login state
-            sessionStorage.removeItem('loggedIn');
-            sessionStorage.removeItem('username');
-            sessionStorage.removeItem('displayName');
-            
+            sessionStorage.clear(); // Clear session storage
             alert('Đã đăng xuất!');
+            window.location.reload(); // Reload to show login screen
         });
 
         // Check login state on page load
@@ -625,6 +1067,13 @@
             e.preventDefault();
             alert('Đã lưu thông tin nhân viên!');
             showSection('employee-list');
+        });
+
+        // Handle contract form submission
+        document.getElementById('contract-template-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Đã lưu mẫu hợp đồng!');
+            showSection('contract-info');
         });
 
         // Add event listeners for other forms as needed
