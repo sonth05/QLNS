@@ -38,12 +38,12 @@
             <ul class="sidebar-menu">
                 <li>
                     <a href="#" class="active" onclick="showSection('dashboard')">
-                        <i class="fas fa-home"></i> Tổng quan
+                        <i>🏠</i></i> Tổng quan
                     </a>
                 </li>
                 <li>
                     <a href="#" onclick="toggleSubmenu(this)">
-                        <i class="fas fa-users"></i> Quản lý hồ sơ  nhân viên
+                        <i>👥</i></i> Quản lý hồ sơ nhân viên
                     </a>
                     <ul>
                         <li><a href="#" onclick="showSection('employee-list')">Thêm danh sách nhân viên</a></li>
@@ -54,7 +54,7 @@
                 </li>
                 <li>
                     <a href="#" onclick="toggleSubmenu(this)">
-                        <i class="fas fa-file-contract"></i> Quản lý hợp đồng lao động
+                        <i>📝</i></i> Quản lý hợp đồng lao động
                     </a>
                     <ul>
                         <li><a href="#" onclick="showSection('contract-info')">Thông tin hợp đồng</a></li>
@@ -63,7 +63,7 @@
                 </li>
                 <li>
                     <a href="#" onclick="toggleSubmenu(this)">
-                        <i class="fas fa-shield-alt"></i> Quản lý bảo hiểm
+                        <i>🔒</i></i> Quản lý bảo hiểm
                     </a>
                     <ul>
                         <li><a href="#" onclick="showSection('insurance-management')">Quản lý bảo hiểm</a></li>
@@ -72,7 +72,7 @@
                 </li>
                 <li>
                     <a href="#" onclick="toggleSubmenu(this)">
-                        <i class="fas fa-road"></i> Quản lý quá trình hoạt động
+                        <i>📈</i></i> Quản lý quá trình hoạt động
                     </a>
                     <ul>
                         <li><a href="#" onclick="showSection('work-assignment')">Quản lý công tác</a></li>
@@ -81,7 +81,7 @@
                 </li>
                 <li>
                     <a href="#" onclick="toggleSubmenu(this)">
-                        <i class="fas fa-graduation-cap"></i> Quản lý đào tạo
+                        <i>🎓</i> </i> Quản lý đào tạo
                     </a>
                     <ul>
                         <li><a href="#" onclick="showSection('employee-training')">Đào tạo nhân viên</a></li>
@@ -90,7 +90,7 @@
                 </li>
                 <li>
                     <a href="#" onclick="toggleSubmenu(this)">
-                        <i class="fas fa-chart-bar"></i> Quản lý thống kê và báo cáo
+                        <i>📊</i></i> Quản lý thống kê và báo cáo
                     </a>
                     <ul>
                         <li><a href="#" onclick="showSection('profile-report')">Báo cáo hồ sơ</a></li>
@@ -684,6 +684,37 @@
                     </form>
                 </div>
 
+                <div id="insurance-benefit-template" class="section" style="display: none;">
+                    <h2>Mẫu bảo hiểm và phúc lợi</h2>
+                    <form id="insurance-benefit-template-form">
+                        <div class="form-group">
+                            <label>Mã mẫu</label>
+                            <input type="text" placeholder="Nhập mã mẫu">
+                        </div>
+                        <div class="form-group">
+                            <label>Tên mẫu</label>
+                            <input type="text" placeholder="Nhập tên mẫu">
+                        </div>
+                        <div class="form-group">
+                            <label>Loại mẫu</label>
+                            <select>
+                                <option>Chọn loại mẫu</option>
+                                <option>Bảo hiểm xã hội</option>
+                                <option>Bảo hiểm y tế</option>
+                                <option>Bảo hiểm thất nghiệp</option>
+                                <option>Phúc lợi</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Mô tả</label>
+                            <textarea placeholder="Nhập mô tả mẫu"></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-save"></i> Lưu mẫu
+                        </button>
+                    </form>
+                </div>
+
                 <div id="work-assignment" class="section" style="display: none;">
                     <h2>Quản lý công tác</h2>
                     <form id="work-assignment-form">
@@ -978,6 +1009,33 @@
                     <h2>Báo cáo đào tạo</h2>
                     <!-- Training report content -->
                 </div>
+
+                <div id="individual-report" class="section" style="display: none;">
+                    <h2>Mẫu báo cáo cá nhân</h2>
+                    <form id="individual-report-form">
+                        <div class="form-group">
+                            <label>Mã nhân viên</label>
+                            <input type="text" placeholder="Nhập mã nhân viên" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Loại báo cáo</label>
+                            <select required>
+                                <option value="">Chọn loại báo cáo</option>
+                                <option value="profile">Báo cáo hồ sơ</option>
+                                <option value="contract">Báo cáo hợp đồng</option>
+                                <option value="benefit">Báo cáo phúc lợi</option>
+                                <option value="activity">Báo cáo hoạt động</option>
+                                <option value="training">Báo cáo đào tạo</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-file-alt"></i> Tạo báo cáo
+                        </button>
+                    </form>
+                    <div id="report-result" style="margin-top: 20px;">
+                        <!-- Report content will be dynamically generated here -->
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -1119,11 +1177,17 @@
         // Check login state on page load
         window.addEventListener('DOMContentLoaded', () => {
             const isLoggedIn = sessionStorage.getItem('loggedIn') === 'true';
-            if (isLoggedIn) {
-                const displayName = sessionStorage.getItem('displayName');
-                loginBtn.style.display = 'none';
-                userProfile.style.display = 'flex';
-                usernameDisplay.textContent = displayName;
+            if (!isLoggedIn) {
+                // Redirect to login page if not logged in
+                window.location.href = 'index.html';
+            } else {
+                // Load user data
+                const username = sessionStorage.getItem('username');
+                const name = sessionStorage.getItem('name');
+                const avatar = sessionStorage.getItem('avatar');
+
+                document.getElementById('username-display').textContent = name;
+                document.getElementById('user-avatar').src = avatar || 'avatar.jpg';
             }
             
             // Show dashboard by default
@@ -1262,6 +1326,29 @@
 
             // Show the table
             table.style.display = 'table';
+        });
+
+        document.getElementById('individual-report-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const employeeId = this.querySelector('input[type="text"]').value;
+            const reportType = this.querySelector('select').value;
+
+            if (!employeeId || !reportType) {
+                alert('Vui lòng nhập đầy đủ thông tin!');
+                return;
+            }
+
+            // Mock data for demonstration
+            const reports = {
+                profile: `Báo cáo hồ sơ cho nhân viên ${employeeId}: Thông tin cá nhân, phòng ban, chức danh.`,
+                contract: `Báo cáo hợp đồng cho nhân viên ${employeeId}: Loại hợp đồng, ngày bắt đầu, ngày kết thúc.`,
+                benefit: `Báo cáo phúc lợi cho nhân viên ${employeeId}: Các chế độ phúc lợi đã nhận.`,
+                activity: `Báo cáo hoạt động cho nhân viên ${employeeId}: Tiến độ công việc, đánh giá hiệu suất.`,
+                training: `Báo cáo đào tạo cho nhân viên ${employeeId}: Các khóa đào tạo đã tham gia, kết quả đánh giá.`
+            };
+
+            const result = reports[reportType] || 'Không tìm thấy dữ liệu báo cáo.';
+            document.getElementById('report-result').innerHTML = `<p>${result}</p>`;
         });
     </script>
 </body>
