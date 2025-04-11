@@ -1,3 +1,41 @@
+// src/services/auth.js
+export async function register(username, password) {
+  const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/register`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username, password })
+  });
+
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.message);
+  return data;
+}
+
+
+export async function login(username, password) {
+  const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/login`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username, password })
+  });
+
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.message);
+
+  // Lưu token vào localStorage nếu muốn dùng sau
+  localStorage.setItem('token', data.token);
+
+  return data;
+}
+
+
+
+
+
+
+
+
+
 userAvatar.addEventListener('click', function(e) {
     e.preventDefault();
     e.stopPropagation();
