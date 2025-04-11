@@ -1,3 +1,32 @@
+const API_URL = 'https://https://qlns-two.vercel.app/api';
+
+async function register(username, password) {
+  const response = await fetch(`${API_URL}/auth/register`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username, password })
+  });
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.message);
+  return data;
+}
+
+async function login(username, password) {
+  const response = await fetch(`${API_URL}/auth/login`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username, password })
+  });
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.message);
+  localStorage.setItem('token', data.token);
+  return data;
+}
+
+
+
+
+
 // src/services/auth.js
 export async function register(username, password) {
   const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/register`, {
@@ -27,6 +56,30 @@ export async function login(username, password) {
 
   return data;
 }
+
+document.getElementById('loginButton').addEventListener('click', async () => {
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+  try {
+    await login(username, password);
+    alert('Đăng nhập thành công!');
+    // Chuyển hướng hoặc thực hiện hành động tiếp theo
+  } catch (err) {
+    alert('Đăng nhập thất bại: ' + err.message);
+  }
+});
+
+document.getElementById('registerButton').addEventListener('click', async () => {
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+  try {
+    await register(username, password);
+    alert('Đăng ký thành công!');
+    // Chuyển hướng hoặc thực hiện hành động tiếp theo
+  } catch (err) {
+    alert('Đăng ký thất bại: ' + err.message);
+  }
+});
 
 
 
